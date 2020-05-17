@@ -1,0 +1,11 @@
+*.exe
+*.zip
+*.go
+*.jar
+*.war
+*.tfstate
+*.retry
+.idea
+.terraform
+terraform.tfstate*
+.DS_Store
