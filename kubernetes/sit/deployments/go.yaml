@@ -1,0 +1,18 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: helloworld-go
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: helloworld-go
+    spec:
+      containers:
+        - name: helloworld-go
+          image: 354285753755.dkr.ecr.ap-southeast-1.amazonaws.com/sit-helloworld-go
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8888
+
