@@ -31,3 +31,11 @@ resource "aws_iam_role_policy_attachment" "eks-worker-role-CloudWatchAgentServer
   policy_arn = "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"
   role = module.eks-worker-role.role-name
 }
+resource "aws_iam_role_policy_attachment" "eks-worker-role-EC2FullAccess" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2FullAccess"
+  role = module.eks-worker-role.role-name
+}
+resource "aws_iam_role_policy_attachment" "eks-worker-role-WAFFullAccess" {
+  policy_arn = "arn:aws:iam::aws:policy/AWSWAFFullAccess"
+  role = module.eks-worker-role.role-name
+}
