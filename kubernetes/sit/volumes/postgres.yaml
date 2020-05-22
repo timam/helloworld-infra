@@ -2,6 +2,8 @@ kind: StorageClass
 apiVersion: storage.k8s.io/v1
 metadata:
   name: sit-helloworld-postgres
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
 provisioner: kubernetes.io/aws-ebs
 parameters:
   type: gp2
@@ -18,7 +20,7 @@ metadata:
   labels:
     app: sit-helloworld-django
 spec:
-  storageClassName: generic
+  storageClassName: gp2
   accessModes:
     - ReadWriteOnce
   resources:
