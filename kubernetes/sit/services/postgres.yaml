@@ -4,7 +4,7 @@ metadata:
   name: sit-helloworld-postgres
 spec:
   selector:
-    app: postgress
+    app: sit-helloworld-postgres
   ports:
     - port: 5432
       protocol: TCP
