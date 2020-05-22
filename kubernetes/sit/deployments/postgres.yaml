@@ -22,9 +22,6 @@ spec:
           envFrom:
             - secretRef:
                 name: sit-helloworld-postgres
-#          envFrom:
-#            - configMapRef:
-#                name: sit-helloworld-postgres
           volumeMounts:
             - mountPath: /var/lib/postgresql
               name: sit-helloworld-postgres
