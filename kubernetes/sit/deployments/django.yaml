@@ -8,11 +8,11 @@ spec:
   replicas: 2
   selector:
     matchLabels:
-      labels: sit-helloworld-django
+      app: sit-helloworld-django
   template:
     metadata:
       labels:
-        pod: sit-helloworld-django
+        app: sit-helloworld-django
     spec:
       containers:
         - name: sit-helloworld-django
