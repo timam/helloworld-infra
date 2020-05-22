@@ -1,30 +1,26 @@
-kind: PersistentVolume
-apiVersion: v1
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
 metadata:
-  name: sit-helloworld-postgres
-  labels:
-    type: local
-spec:
-  capacity:
-    storage: 2Gi
-  storageClassName: standard
-  accessModes:
-    - ReadWriteMany
-  hostPath:
-    path: /data/postgres-pv
+  name: generic
+provisioner: kubernetes.io/aws-ebs
+parameters:
+  type: gp2
+  zones: ap-southeast-1a
+  iopsPerGB: "10"
+  fsType: ext4
 
 ---
 
-kind: PersistentVolumeClaim
 apiVersion: v1
+kind: PersistentVolumeClaim
 metadata:
-  name: sit-helloworld-postgres
+  name: slow
   labels:
-    type: local
+    app: sit-helloworld-django
 spec:
+  storageClassName: generic
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   resources:
     requests:
-      storage: 2Gi
-  volumeName: sit-helloworld-postgres
+      storage: 1Gi
