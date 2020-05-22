@@ -1,47 +1,28 @@
+apiVersion: extensions/v1beta1
 kind: Deployment
-apiVersion: apps/v1
 metadata:
-  name: sit-helloworld-postgres
+  name: postgres
 spec:
   replicas: 1
-  selector:
-    matchLabels:
-      app: sit-helloworld-postgres
   template:
     metadata:
       labels:
-        app: sit-helloworld-postgres
-        tier: backend
-
+        app: postgres
     spec:
       containers:
-        - name: sit-helloworld-postgres
-          image: postgres
-          env:
-            - name: POSTGRES_USER
-              valueFrom:
-                secretKeyRef:
-                  key: sit-helloworld-postgres
-                  name: postgress-user
-
-            - name: POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  key: sit-helloworld-postgres
-                  name: postgress-password
-
-            - name: POSTGRES_DB
-              valueFrom:
-                secretKeyRef:
-                  key: sit-helloworld-postgres
-                  name: postgress-db
-
+        - name: postgres
+          image: postgres:10.4
+          imagePullPolicy: "IfNotPresent"
           ports:
             - containerPort: 5432
+          envFrom:
+            - configMapRef:
+                name: postgres-config
           volumeMounts:
-            - mountPath: /var/lib/postgresql/data
-              name: sit-helloworld-postgres
+            - mountPath: /var/lib/postgresql
+              name: postgredb
       volumes:
-        - name: sit-helloworld-postgres
+        - name: postgredb
           persistentVolumeClaim:
             claimName: sit-helloworld-postgres
+  Co
