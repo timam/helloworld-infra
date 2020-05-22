@@ -1,0 +1,28 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: sit-helloworld-django
+  labels:
+    app: sit-helloworld-django
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      labels: sit-helloworld-django
+  template:
+    metadata:
+      labels:
+        pod: sit-helloworld-django
+    spec:
+      containers:
+        - name: sit-helloworld-django
+          image: 354285753755.dkr.ecr.ap-southeast-1.amazonaws.com/sit-helloworld-django:1
+          ports:
+            - containerPort: 8000
+          envFrom:
+            - secretRef:
+                name: sit-helloworld-django
+
+
+
+
