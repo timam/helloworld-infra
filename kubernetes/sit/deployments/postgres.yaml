@@ -1,13 +1,17 @@
-apiVersion: extensions/v1beta1
 kind: Deployment
+apiVersion: apps/v1
 metadata:
-  name: postgres
+  name: sit-helloworld-postgres
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: sit-helloworld-postgres
   template:
     metadata:
       labels:
-        app: postgres
+        app: sit-helloworld-postgres
+        tier: backend
     spec:
       containers:
         - name: postgres
@@ -25,4 +29,3 @@ spec:
         - name: postgredb
           persistentVolumeClaim:
             claimName: sit-helloworld-postgres
-  Co
