@@ -22,19 +22,19 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: sit-helloworld-postgres
-                  name: POSTGRES_USER
+                  name: postgress-user
 
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
                   key: sit-helloworld-postgres
-                  name: POSTGRES_PASSWORD
+                  name: postgress-password
 
             - name: POSTGRES_DB
               valueFrom:
                 secretKeyRef:
                   key: sit-helloworld-postgres
-                  name: POSTGRES_DB
+                  name: postgress-db
 
           ports:
             - containerPort: 5432
