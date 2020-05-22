@@ -12,19 +12,19 @@ spec:
       labels:
         app: sit-helloworld-postgres
         tier: backend
-
-
     spec:
       containers:
         - name: sit-helloworld-postgres
           image: postgres:10.4
           imagePullPolicy: "IfNotPresent"
-
           ports:
             - containerPort: 5432
           envFrom:
-            - configMapRef:
-                name: postgres-config
+            - secretRef:
+                name: sit-helloworld-postgres
+#          envFrom:
+#            - configMapRef:
+#                name: sit-helloworld-postgres
           volumeMounts:
             - mountPath: /var/lib/postgresql
               name: sit-helloworld-postgres
