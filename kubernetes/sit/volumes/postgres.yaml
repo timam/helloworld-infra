@@ -1,0 +1,30 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: sit-helloworld-postgres
+  labels:
+    type: local
+spec:
+  capacity:
+    storage: 2Gi
+  storageClassName: standard
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: /data/postgres-pv
+
+---
+
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: sit-helloworld-postgres
+  labels:
+    type: local
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 2Gi
+  volumeName: sit-helloworld-postgres

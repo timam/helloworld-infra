@@ -1,0 +1,47 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: sit-helloworld-postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sit-helloworld-postgres
+  template:
+    metadata:
+      labels:
+        app: sit-helloworld-postgres
+        tier: backend
+
+    spec:
+      containers:
+        - name: sit-helloworld-postgres
+          image: postgres
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  key: sit-helloworld-postgres
+                  name: POSTGRES_USER
+
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: sit-helloworld-postgres
+                  name: POSTGRES_PASSWORD
+
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  key: sit-helloworld-postgres
+                  name: POSTGRES_DB
+
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: sit-helloworld-postgres
+      volumes:
+        - name: sit-helloworld-postgres
+          persistentVolumeClaim:
+            claimName: sit-helloworld-postgres
