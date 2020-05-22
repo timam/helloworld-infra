@@ -11,9 +11,9 @@ reclaimPolicy: Delete
 allowVolumeExpansion: true
 mountOptions:
   - debug
-  ​
+
 ---
-  ​
+
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
