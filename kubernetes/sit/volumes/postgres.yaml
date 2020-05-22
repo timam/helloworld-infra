@@ -1,7 +1,7 @@
 kind: StorageClass
 apiVersion: storage.k8s.io/v1
 metadata:
-  name: generic
+  name: sit-helloworld-postgres
 provisioner: kubernetes.io/aws-ebs
 parameters:
   type: gp2
@@ -14,7 +14,7 @@ parameters:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: slow
+  name: sit-helloworld-postgres
   labels:
     app: sit-helloworld-django
 spec:
