@@ -8,7 +8,7 @@ spec:
       containers:
         - name: sit-helloworld-django-migrations
           image: 354285753755.dkr.ecr.ap-southeast-1.amazonaws.com/sit-helloworld-django:1
-          command: ["python", "/app/src/parasite/manage.py","runserver"]
+          command: ["python", "/app/src/parasite/manage.py","migrate"]
           envFrom:
             - secretRef:
                 name: sit-helloworld-django
