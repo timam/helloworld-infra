@@ -6,7 +6,7 @@ metadata:
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internal
     alb.ingress.kubernetes.io/subnets: subnet-7369383a, subnet-59c0dd1f
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
     alb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}'
     alb.ingress.kubernetes.io/target-type: instance
     alb.ingress.kubernetes.io/security-groups: sg-032900f61b5460c5a
@@ -16,6 +16,13 @@ metadata:
     app: sit-helloworld-private-alb
 spec:
   rules:
+    - http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: ssl-redirect
+              servicePort: use-annotation
+
     - host: helloworld-django.labs.bka.sh
       http:
         paths:
