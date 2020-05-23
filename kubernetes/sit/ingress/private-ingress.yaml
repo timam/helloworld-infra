@@ -27,5 +27,5 @@ spec:
       http:
         paths:
           - backend:
-              serviceName: sit-helloworld-go
+              serviceName: sit-helloworld-django
               servicePort: 8080
