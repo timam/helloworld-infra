@@ -21,4 +21,4 @@ spec:
         paths:
           - backend:
               serviceName: sit-helloworld-django
-              servicePort: 8080
+              servicePort: 8000
