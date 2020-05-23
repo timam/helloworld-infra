@@ -41,7 +41,7 @@ locals {
   instance_type = local.tf_instance_type[local.env]
 
   tf_worker-keypair = {
-    sit = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC7ro+mNHphqACjCPzodkeUBvjWDqeveAo8vKCWwbjCpqesrEcbFPxxBdh4c3V8bihQ+BTHqTRiuMxYQOSlGpD7IsXoIO6AUb1Huji5NhniQnPPsquhJrN7tHoIvEtsSttmoB34dHkNK9WpdyLU/3NKQDBrNLAqG1xmm9FHTGxElBqKBOcRXYkpso7H+YCtclCympBSrO1Y78n+rwjnb42tLuhn3zEmGBngkz5tJYdNkWwuoIE5k5LSZQD3T2WuAIf4IZyKLtP2zZDHjtq08P+n1fXH8Jzfj+gaeRcywgHncjBAmsm7gxFC5E/RU+G8CUe0E+6q40ddaZ+dgg1dhknx"
+    sit = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDFP13Y8TyBgKuCzGzrXItnIylgW6A49ykP7yUf7ZliVC2+oD+3EeDWhTKsQQsRaoio9+A+gq1IaNN+UVudUw7xJ7rXdF4LWfAtWsqXAb5bsHB7bsXNeeJ6/dXreK1wqcUbuorDuGVGnXCkIMjT/MVJXUyFSvw/18ns7wQOZO4ng7/9UdT3QBdjxaTP+n8JjRbLsY4fa4GYMfOLwN7sPwBURatijN7wxrnvaBIK+8FVPq2YE4jK0ypFe3JHFZnoob+hGDRCZBh9zNxh9Mai/G6sDMekBl3yFXlKyebB0OMN2BecO0+F44s/lVC/jbsIiU+3MPLOT0PFk1D53C+LLSpl"
     uat = ""
     prod = ""
     lt = ""
