@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: helloworld-public-alb
+  name: sit-helloworld-public-alb
   annotations:
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
@@ -13,7 +13,7 @@ metadata:
     alb.ingress.kubernetes.io/healthcheck-path: /
 
   labels:
-    app: public-ingress
+    app: sit-helloworld-public-alb
 spec:
   rules:
     - host: helloworld-go.labs.bka.sh
