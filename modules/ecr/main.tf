@@ -6,6 +6,6 @@ resource "aws_ecr_repository" "ecr" {
   }
   tags = var.tags
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
 }

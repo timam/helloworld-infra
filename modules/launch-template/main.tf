@@ -25,6 +25,6 @@ resource "aws_launch_template" "lt" {
     tags = var.volume_tags
   }
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
 }
