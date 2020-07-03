@@ -1,0 +1,16 @@
+{{- range .Values.gomodules }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sit-helloworld-go
+spec:
+  ports:
+    - port: {{ .servicePort }}
+      targetPort: {{ .servicePort }}
+      protocol: TCP
+  type: NodePort
+  selector:
+    app: {{ $.Values.env }}-{{ $.Values.project }}-{{ .name }}
+---
+{{- end }}
