@@ -10,9 +10,9 @@ alb_ingress:
   public_security_group: sg-09615d2db4956c5cf
   certificate_arn: arn:aws:acm:ap-southeast-1:354285753755:certificate/44e11307-55f4-4365-a0fe-0c408af4f7fa
   private_subnet1: subnet-7369383a
-  private_subnet2: subnet-bf092df6
-  public_subnet1: subnet-59c0dd1f
-  public_subnet2: subnet-4978670f
+  private_subnet2: subnet-59c0dd1f
+  public_subnet1: subnet-4978670f
+  public_subnet2: subnet-bf092df6
 gomodules:
   helloworld-go:
     name: go
