@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: {{ $.Values.env }}-{{ $.Values.project }}-{{ .name }}
-          image: {{ $.Values.aws_account_id }}.dkr.ecr.{{ $.Values.region }}.amazonaws.com//{{ $.Values.env }}-{{ $.Values.project }}-{{ .name }}:1
+          image: {{ $.Values.aws_account_id }}.dkr.ecr.{{ $.Values.region }}.amazonaws.com/{{ $.Values.env }}-{{ $.Values.project }}-{{ .name }}:1
           ports:
             - containerPort: {{ .containerPort }}
 ---
