@@ -26,6 +26,6 @@ spec:
     http:
       paths:
         - backend:
-            serviceName: {{ $.Values.env }}-{{ .Values.project }}-{{ index .Values "modules" "helloworld-go" "name" }}
-            servicePort: {{ index .Values "modules" "helloworld-go" "servicePort" }}
+            serviceName: {{ $.Values.env }}-{{ $.Values.project }}-{{ index .Values "gomodules" "helloworld-go" "name" }}
+            servicePort: {{ index .Values "gomodules" "helloworld-go" "servicePort" }}
             

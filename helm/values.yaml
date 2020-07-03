@@ -12,4 +12,10 @@ alb_ingress:
   private_subnet2: subnet-bf092df6
   public_subnet1: subnet-59c0dd1f
   public_subnet2: subnet-4978670f
+gomodules:
+  helloworld-go:
+    name: go
+    replicas: 2
+    containerPort: 8888
+    servicePort: 8888
 
