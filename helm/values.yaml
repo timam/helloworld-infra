@@ -25,5 +25,9 @@ postgresmodules:
     replicas: 1
     containerPort: 5432
     servicePort: 5432
+    dbname: postgres
+    dbuser: postgresuser
+    dbpass: postgresuserpass
+
 
 
