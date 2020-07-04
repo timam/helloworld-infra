@@ -19,6 +19,18 @@ gomodules:
     replicas: 2
     containerPort: 8888
     servicePort: 8888
+djangomodules:
+  helloworld-django:
+    name: django
+    replicas: 2
+    containerPort:
+    servicePort:
+    dbname: postgres
+    dbuser: postgresuser
+    dbpass: postgresuserpass
+    dbhost: sit-helloworld-postgres
+    dbport: 5432
+    secret_key: "dert56*&67$=@_tb^7s8do_u$s34R$67HYlyorub1b8h&tg*93"
 postgresmodules:
   helloworld-postgres:
     name: postgres
