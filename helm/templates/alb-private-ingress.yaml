@@ -22,4 +22,10 @@ spec:
          backend:
            serviceName: ssl-redirect
            servicePort: use-annotation
+  - host: helloworld-django.{{ .Values.domain_name }}
+    http:
+      paths:
+        - backend:
+            serviceName: {{ $.Values.env }}-{{ $.Values.project }}-{{ index .Values "djangomodules" "helloworld-django" "name" }}
+            servicePort: {{ index .Values "djangomodules" "helloworld-django" "servicePort" }}
            
