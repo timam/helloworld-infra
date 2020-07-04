@@ -1,0 +1,16 @@
+{{- range .Values.djangomodules }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $.Values.env }}-{{ $.Values.project }}-{{ .name }}
+spec:
+  ports:
+    - port: {{ .servicePort}}
+      targetPort: {{ .servicePort}}
+      protocol: TCP
+  type: NodePort
+  selector:
+    app: {{ $.Values.env }}-{{ $.Values.project }}-{{ .name }}
+---
+  {{- end}}

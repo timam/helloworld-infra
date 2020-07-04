@@ -23,8 +23,8 @@ djangomodules:
   helloworld-django:
     name: django
     replicas: 2
-    containerPort:
-    servicePort:
+    containerPort: 8000
+    servicePort: 8000
     dbname: postgres
     dbuser: postgresuser
     dbpass: postgresuserpass
