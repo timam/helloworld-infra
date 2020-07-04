@@ -1,0 +1,35 @@
+{{- range .Values.postgresmodules }}
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: {{ $.Values.env }}-{{ $.Values.project }}-{{ .name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ $.Values.env }}-{{ $.Values.project }}-{{ .name }}
+  template:
+    metadata:
+      labels:
+        app: {{ $.Values.env }}-{{ $.Values.project }}-{{ .name }}
+        tier: backend
+    spec:
+      containers:
+        - name: {{ $.Values.env }}-{{ $.Values.project }}-{{ .name }}
+          image: postgres:10.4
+          imagePullPolicy: "IfNotPresent"
+          ports:
+            - containerPort: {{ .containerPort}}
+          envFrom:
+            - secretRef:
+                name: {{ $.Values.env }}-{{ $.Values.project }}-{{ .name }}
+          volumeMounts:
+            - mountPath: /var/lib/postgresql
+              name: {{ $.Values.env }}-{{ $.Values.project }}-{{ .name }}
+      volumes:
+        - name: {{ $.Values.env }}-{{ $.Values.project }}-{{ .name }}
+          persistentVolumeClaim:
+            claimName: {{ $.Values.env }}-{{ $.Values.project }}-{{ .name }}
+---
+  {{- end }}

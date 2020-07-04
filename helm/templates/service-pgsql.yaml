@@ -1,0 +1,15 @@
+{{- range .Values.postgresmodules }}
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{ $.Values.env }}-{{ $.Values.project }}-{{ .name}}
+spec:
+  selector:
+    app: {{ $.Values.env }}-{{ $.Values.project }}-{{ .name}}
+  ports:
+    - port: {{ .servicePort }}
+      protocol: TCP
+      targetPort: {{ .servicePort }}
+---
+  {{- end }}

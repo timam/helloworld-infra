@@ -19,4 +19,11 @@ gomodules:
     replicas: 2
     containerPort: 8888
     servicePort: 8888
+postgresmodules:
+  helloworld-postgres:
+    name: postgres
+    replicas: 1
+    containerPort: 5432
+    servicePort: 5432
+
 
