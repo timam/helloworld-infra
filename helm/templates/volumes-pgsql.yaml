@@ -1,0 +1,34 @@
+{{- range .Values.postgresmodules }}
+---
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: sit-helloworld-postgres
+  annotations:
+    storageclass.beta.kubernetes.io/is-default-class: "true"
+provisioner: kubernetes.io/aws-ebs
+parameters:
+  type: gp2
+reclaimPolicy: Delete
+allowVolumeExpansion: true
+mountOptions:
+  - debug
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ $.Values.env }}-{{ $.Values.project }}-{{ .name}}
+  labels:
+    {{/* NEED TO MAKE IT DYNAMIC */}}
+    app: sit-helloworld-django
+spec:
+  storageClassName: {{ $.Values.env }}-{{ $.Values.project }}-{{ .name}}
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+{{- end }}
