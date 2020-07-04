@@ -40,6 +40,7 @@ postgresmodules:
     dbname: postgres
     dbuser: postgresuser
     dbpass: postgresuserpass
+    consumerApp: sit-helloworld-django
 
 
 

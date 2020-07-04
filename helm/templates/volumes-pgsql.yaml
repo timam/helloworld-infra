@@ -21,8 +21,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: {{ $.Values.env }}-{{ $.Values.project }}-{{ .name}}
   labels:
-    {{/* NEED TO MAKE IT DYNAMIC */}}
-    app: sit-helloworld-django
+    app: {{ .consumerApp }}
 spec:
   storageClassName: {{ $.Values.env }}-{{ $.Values.project }}-{{ .name}}
   accessModes:
