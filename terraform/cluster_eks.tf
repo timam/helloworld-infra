@@ -1,5 +1,6 @@
 module "eks-cluster" {
   source = "../modules/eks"
+  eksVersion = local.eksVersion
   name = "${local.env}-${local.project}-eks-cluster"
   subnet_ids = [data.aws_subnet.private-subnet-1b.id, data.aws_subnet.private-subnet-1c.id]
   tags = merge(map("Name",join("-",[local.env,local.project,"eks-cluster"])),map("ResourceType","eks-master"),local.common_tags)
