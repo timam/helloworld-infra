@@ -71,6 +71,13 @@ locals {
   }
   max_size = local.tf_max_size[local.env]
 
+  tf_policy_enabled = {
+    sit  = "true"
+    uat  = "true"
+    prod = "false"
+  }
+  policy_enabled = local.tf_policy_enabled[local.env]
+
   tf_asg_mixed_instance_types = {
     sit = {
       "m6g.xlarge" = "1"
