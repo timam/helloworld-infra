@@ -1,0 +1,4 @@
+- import_tasks: docker-image-build.yaml
+  when: module != "base-image"
+- import_tasks: docker-base-image-build.yaml
+  when: module == "base-image"
