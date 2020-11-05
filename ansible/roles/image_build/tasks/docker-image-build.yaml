@@ -30,8 +30,7 @@
 - name: Build Docker Image
   docker_image:
     build:
-#      path: "{{ workspace }}/ansible_managed_{{ env }}/docker_build/{{ module }}"
-      path: "{{ workspace }}/ansible/ansible_managed_{{ env }}/docker_build/{{ module }}"
+      path: "{{ workspace }}/ansible_managed_{{ env }}/docker_build/{{ module }}"
     name: "{{ aws_account_id }}.dkr.ecr.{{ aws_region }}.amazonaws.com/{{ env }}-{{ project_name }}-{{ module }}:local"
     push: no
     pull: false
