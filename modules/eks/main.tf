@@ -2,6 +2,7 @@ resource "aws_eks_cluster" "eks" {
   depends_on = [aws_iam_role.eks-role]
   name = var.name
   role_arn = aws_iam_role.eks-role.arn
+  version = var.eksVersion
   vpc_config {
     subnet_ids = var.subnet_ids
     security_group_ids = var.security_group_ids

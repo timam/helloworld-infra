@@ -1,5 +1,5 @@
 module "eks-worker-asg" {
-  source = "../tf-module/autoscale"
+  source = "../modules/autoscale"
   policy_enabled = local.policy_enabled
   desired_capacity = local.desired_capacity
   launch_template = module.eks-launch-template.lt-id
