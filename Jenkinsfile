@@ -43,7 +43,7 @@ pipeline {
                 IBRANCH = 'lt'
               }
             }
-            git(url: "https://github.com/bKash-developer/${env.IREPO}", branch: "${IBRANCH}", credentialsId: 'devops')
+            git(url: "https://github.com/timam/${env.IREPO}", branch: "${IBRANCH}", credentialsId: 'devops')
 
           }
         }
