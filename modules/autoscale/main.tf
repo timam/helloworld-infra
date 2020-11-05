@@ -4,24 +4,28 @@ resource "aws_autoscaling_group" "asg" {
   min_size = var.min_size
   desired_capacity = var.desired_capacity
   default_cooldown= "180"
-  health_check_grace_period = "120"
+  health_check_grace_period = "90"
   health_check_type = "ELB"
   force_delete = true
   termination_policies = ["OldestInstance", "OldestLaunchTemplate"]
   vpc_zone_identifier = var.vpc_zone_identifier
   enabled_metrics = [ "GroupMinSize", "GroupMaxSize", "GroupDesiredCapacity", "GroupInServiceInstances", "GroupPendingInstances", "GroupStandbyInstances", "GroupTerminatingInstances", "GroupTotalInstances"]
+  launch_template {
+    id = var.launch_template
+    version = "$Latest"
+  }
+
   mixed_instances_policy {
     launch_template {
       launch_template_specification {
         launch_template_id = var.launch_template
         version = "$Latest"
       }
-
       dynamic "override" {
         for_each = var.asg_mixed_instance_types
         content {
           instance_type = override.key
-#         weighted_capacity = override.value
+          #          weighted_capacity = override.value
         }
       }
     }
@@ -33,32 +37,9 @@ resource "aws_autoscaling_group" "asg" {
       spot_allocation_strategy = var.spot_allocation_strategy
     }
   }
-  tags = concat(
-  [
-    {
-      "key"                 = "Name"
-      "value"               = var.name
-      "propagate_at_launch" = false
-    },
-  ],
-  var.tags,
-  local.tags_asg_format,
-  )
   lifecycle {
+    ignore_changes = [target_group_arns]
     create_before_destroy = true
-  }
-}
-locals {
-  tags_asg_format = null_resource.tags_as_list_of_maps.*.triggers
-}
-
-resource "null_resource" "tags_as_list_of_maps" {
-  count = length(keys(var.tags_as_map))
-
-  triggers = {
-    "key"                 = keys(var.tags_as_map)[count.index]
-    "value"               = values(var.tags_as_map)[count.index]
-    "propagate_at_launch" = "true"
   }
 }
 resource "aws_autoscaling_schedule" "office-time-scale-up" {
@@ -67,7 +48,7 @@ resource "aws_autoscaling_schedule" "office-time-scale-up" {
   min_size = var.min_size
   max_size = var.max_size
   desired_capacity = var.min_size
-  recurrence = "0 3 * * SUN-THU"
+  recurrence = "30 2 * * SUN-THU"
   autoscaling_group_name = aws_autoscaling_group.asg.name
 }
 resource "aws_autoscaling_schedule" "night-time-scale-down" {
@@ -88,3 +69,4 @@ resource "aws_autoscaling_schedule" "schedule-scale-down-midnight" {
   recurrence = "0 20 * * *"
   autoscaling_group_name = aws_autoscaling_group.asg.name
 }
+

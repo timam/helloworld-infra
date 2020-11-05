@@ -53,26 +53,6 @@ locals {
   }
   eksVersion = local.eksVersions[local.env]
 
-  tf_scale-up-policy = {
-    sit  = "true"
-    uat  = "true"
-    prod = "false"
-  }
-  scale-up-policy = local.tf_scale-up-policy[local.env]
-  tf_scale-down-policy = {
-    sit  = "true"
-    uat  = "true"
-    prod = "false"
-  }
-  scale-down-policy = local.tf_scale-down-policy[local.env]
-
-  tf_on_demand_percentage_above_base_capacity = {
-    sit  = "100"
-    uat  = "100"
-    prod = "50"
-  }
-  on_demand_percentage_above_base_capacity = local.tf_on_demand_percentage_above_base_capacity[local.env]
-
   tf_min_size = {
     sit  = "1"
     uat  = "1"
@@ -94,29 +74,35 @@ locals {
   }
   max_size = local.tf_max_size[local.env]
 
+  tf_policy_enabled = {
+    sit  = "true"
+    uat  = "true"
+    prod = "false"
+  }
+  policy_enabled = local.tf_policy_enabled[local.env]
+
   tf_asg_mixed_instance_types = {
-    sit  = {
-      "t3.2xlarge" = "1"
-      "t3.large"   = "1"
-      "t3.xlarge"  = "1"
+    sit = {
+      "m6g.xlarge" = "1"
+      "m5.xlarge"  = "1"
+      "m5a.xlarge" = "1"
+      "c6g.xlarge" = "1"
     }
-    uat  = {
-      "t3.2xlarge" = "1"
-      "t3.large"   = "1"
-      "t3.xlarge"  = "1"
+    uat = {
+      "m6g.xlarge" = "1"
+      "m5.xlarge"  = "1"
+      "m5a.xlarge" = "1"
+      "c6g.xlarge" = "1"
     }
     prod = {
-      "m5.2xlarge" = "1"
+      "m6g.xlarge" = "1"
+      "m5.xlarge"  = "1"
+      "m5a.xlarge" = "1"
+      "c6g.xlarge" = "1"
     }
+
   }
   asg_mixed_instance_types = local.tf_asg_mixed_instance_types[local.env]
-
-  tf-spot_instance_pools = {
-    sit  = "2"
-    uat  = "2"
-    prod = "0"
-  }
-  spot_instance_pools = local.tf-spot_instance_pools[local.env]
 
   tf-spot_allocation_strategy = {
     sit  = "lowest-price"
@@ -124,6 +110,35 @@ locals {
     prod = "capacity-optimized"
   }
   spot_allocation_strategy = local.tf-spot_allocation_strategy[local.env]
+
+  tf_spot_instance_pools = {
+    sit  = "2"
+    uat  = "2"
+    prod = "0"
+  }
+  spot_instance_pools = local.tf_spot_instance_pools[local.env]
+
+  tf_on_demand_percentage_above_base_capacity = {
+    sit  = "100"
+    uat  = "100"
+    prod = "60"
+  }
+  on_demand_percentage_above_base_capacity = local.tf_on_demand_percentage_above_base_capacity[local.env]
+
+  tf_scale-up-policy = {
+    sit  = "false"
+    uat  = "false"
+    prod = "false"
+  }
+  scale-up-policy = local.tf_scale-up-policy[local.env]
+
+  tf_scale-down-policy = {
+    sit  = "true"
+    uat  = "true"
+    prod = "false"
+  }
+  scale-down-policy = local.tf_scale-down-policy[local.env]
+
 
   tf_eks-worker-node-userdata = {
     sit = <<USERDATA
