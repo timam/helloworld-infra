@@ -1,7 +1,7 @@
 ---
 ##Common
 aws_account_id: 354285753755
-project_name: hello-world
+project_name: helloworld
 aws_region: ap-southeast-1
 
 ##Image Build
