@@ -33,7 +33,6 @@
       path: "{{ workspace }}/ansible_managed_{{ env }}/docker_build/{{ module }}"
     name: "{{ aws_account_id }}.dkr.ecr.{{ aws_region }}.amazonaws.com/{{ env }}-{{ project_name }}-{{ module }}:local"
     push: no
-    pull: false
     state: present
     source: build
   notify:
