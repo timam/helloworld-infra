@@ -1,0 +1,6 @@
+- hosts: localhost
+  vars_files:
+    - "./var_files/{{ env }}_varfile.yml"
+  connection: local
+  roles:
+    - image_build
