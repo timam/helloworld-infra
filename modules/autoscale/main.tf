@@ -10,10 +10,6 @@ resource "aws_autoscaling_group" "asg" {
   termination_policies = ["OldestInstance", "OldestLaunchTemplate"]
   vpc_zone_identifier = var.vpc_zone_identifier
   enabled_metrics = [ "GroupMinSize", "GroupMaxSize", "GroupDesiredCapacity", "GroupInServiceInstances", "GroupPendingInstances", "GroupStandbyInstances", "GroupTerminatingInstances", "GroupTotalInstances"]
-  launch_template {
-    id = var.launch_template
-    version = "$Latest"
-  }
 
   mixed_instances_policy {
     launch_template {
