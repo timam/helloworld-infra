@@ -33,14 +33,14 @@ pipeline {
         stage('Checkout Infra Code') {
           steps {
             script {
-              if (params.ENVIRONMENT == 'prod') {
+              if (params.ENVIRONMENT == 'sit') {
                 IBRANCH = 'develop'
               }
               if (params.ENVIRONMENT == 'uat') {
                 IBRANCH = 'develop'
               }
-              if (params.ENVIRONMENT == 'lt') {
-                IBRANCH = 'lt'
+              if (params.ENVIRONMENT == 'prod') {
+                IBRANCH = 'develop'
               }
             }
             git(url: "https://github.com/timam/${env.IREPO}", branch: "${IBRANCH}", credentialsId: 'devops')
