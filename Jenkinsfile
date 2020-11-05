@@ -19,7 +19,7 @@ pipeline {
   }
 
   parameters {
-    choice(choices: ['uat' , 'prod'], description: 'Select Environment', name: 'ENVIRONMENT')
+    choice(choices: ['sit', 'uat' , 'prod'], description: 'Select Environment', name: 'ENVIRONMENT')
     string(defaultValue: "develop", description: 'MW Release Tag:', name: 'MWRELEASETAG')
 
     choice( name: 'buildFrontendDockerImage', choices: "No\nYes", description: 'Do you want to build docker image for Frontend?' )
