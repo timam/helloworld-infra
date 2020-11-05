@@ -1,6 +1,6 @@
 FROM amazonlinux:2
 EXPOSE {{ dockerBuildVars[module].port }}
 RUN rpm -Uvh https://d3pxv6yz143wms.cloudfront.net/11.0.5.10.1/java-11-amazon-corretto-devel-11.0.5.10-1.x86_64.rpm
-ARG JAR_FILE=./target/dockerBuildVars[module]-0.0.1-SNAPSHOT.jar
-COPY ${JAR_FILE} /opt/dockerBuildVars[module].jar
-ENTRYPOINT ["java","-Dspring.profiles.active=dev","-jar","/opt/dockerBuildVars[module].jar"]
+ARG JAR_FILE= {{ workspace }}/{{ helloworldMW }}/{{ module }}/target/{{ module }}-0.0.1-SNAPSHOT.jar
+COPY ${JAR_FILE} /opt/{{ module }}.jar
+ENTRYPOINT ["java","-Dspring.profiles.active=dev","-jar","/opt/{{ module }}.jar"]
