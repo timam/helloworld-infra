@@ -3,7 +3,6 @@
     name: "{{ aws_account_id }}.dkr.ecr.{{ aws_region }}.amazonaws.com/{{ env }}-{{ project_name }}-{{ module }}:local"
     repository: "{{ aws_account_id }}.dkr.ecr.{{ aws_region }}.amazonaws.com/{{ env }}-{{ project_name }}-{{ module }}:{{ code_commit_id.stdout }}"
     push: yes
-    pull: no
 
 - name: Tag Image and Push to ECR [LATEST]
   docker_image:
