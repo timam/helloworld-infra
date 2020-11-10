@@ -3,9 +3,15 @@
 - name: Build Artifacts
   shell: "mvn clean install"
   args:
-    chdir: "../helloworld-spring"
+    chdir: "../{{ helloworldMW }}"
   register: mvn_result
 
 - name: "mvn clean task output"
   debug:
     var: mvn_result
+
+- name: Move artifacts to ansible_managed environment
+  copy:
+    src:  "{{ workspace }}/ {{ helloworldMW }}/{{ item }}/target/{{ item }}-0.0.1-SNAPSHOT.war"
+    dest: "{{ workspace }}/ansible_managed_{{ env }}/docker_build/{{ item }}/{{ item }}.war"
+    with_items: "{{ modules }}"
