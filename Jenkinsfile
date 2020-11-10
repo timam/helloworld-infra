@@ -85,7 +85,7 @@ pipeline {
             expression { params.buildFrontendDockerImage == "Yes" }
           }
           steps {
-            sh "ansible-playbook ansible/copy_artifacts.yaml workspace=${workspace} -e helloworldMW=${MWREPO} -e env=${params.ENVIRONMENT} -e module=frontend"
+            sh "ansible-playbook ansible/copy_artifacts.yaml -e workspace=${workspace} -e helloworldMW=${MWREPO} -e env=${params.ENVIRONMENT} -e module=frontend"
           }
         }
 
@@ -94,7 +94,7 @@ pipeline {
             expression { params.buildFrontendDockerImage == "Yes" }
           }
           steps {
-            sh "ansible-playbook ansible/copy_artifacts.yaml workspace=${workspace} -e helloworldMW=${MWREPO} -e env=${params.ENVIRONMENT} -e module=backend"
+            sh "ansible-playbook ansible/copy_artifacts.yaml -e workspace=${workspace} -e helloworldMW=${MWREPO} -e env=${params.ENVIRONMENT} -e module=backend"
           }
         }
       }
