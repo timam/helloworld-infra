@@ -1,0 +1,6 @@
+- hosts: localhost
+  vars_files:
+    - "./var_files/{{ env }}_varfile.yaml"
+  connection: local
+  roles:
+    - copy_artifacts
