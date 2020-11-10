@@ -5,14 +5,13 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internal
-    alb.ingress.kubernetes.io/subnets: {{ .Values.alb_ingress.private_subnet1 }}, {{ .Values.alb_ingress.private_subnet2 }}
+    alb.ingress.kubernetes.io/subnets: {{ .Values.alb_ingress.private_subnet1 }} , {{ .Values.alb_ingress.private_subnet2 }}, #{{ .Values.alb_ingress.private_subnet3 }}
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
     alb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}'
-    alb.ingress.kubernetes.io/target-type: instance
-    alb.ingress.kubernetes.io/inbound-cidrs: 0.0.0.0/0
     alb.ingress.kubernetes.io/certificate-arn: {{ .Values.alb_ingress.certificate_arn }}
+    alb.ingress.kubernetes.io/target-type: instance
+    alb.ingress.kubernetes.io/inbound-cidrs: {{ .Values.alb_ingress.inbound_cidr }}
     alb.ingress.kubernetes.io/healthcheck-path: /
-    #external-dns.alpha.kubernetes.io/hostname: admin.{{ .Values.domain_name }}, callback.{{ .Values.domain_name }}, admin-app.{{ .Values.domain_name }}
   labels:
     app: private-ingress
 spec:
