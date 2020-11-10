@@ -21,5 +21,5 @@ spec:
       http:
         paths:
           - backend:
-              serviceName: {{ $.Values.env }}-{{ .Values.project }}-{{ .Values.modules.notification.name }}
-              servicePort: {{ .Values.modules.notification.servicePort }}
+              serviceName: {{ $.Values.env }}-{{ .Values.project }}-{{ .Values.modules.frontend.name }}
+              servicePort: {{ .Values.modules.frontend.servicePort }}

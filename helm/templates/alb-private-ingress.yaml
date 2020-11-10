@@ -27,5 +27,5 @@ spec:
       http:
         paths:
           - backend:
-              serviceName: {{ $.Values.env }}-{{ .Values.project }}-{{ index .Values "modules" "admin-portal" "name" }}
-              servicePort: {{ index .Values "modules" "admin-portal" "servicePort" }}
+              serviceName: {{ $.Values.env }}-{{ .Values.project }}-{{ index .Values "modules" "backend" "name" }}
+              servicePort: {{ index .Values "modules" "backend" "servicePort" }}
