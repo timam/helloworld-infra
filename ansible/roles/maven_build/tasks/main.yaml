@@ -21,4 +21,5 @@
   copy:
     src:  "{{ workspace }}/{{ helloworldMW }}/{{ item }}/target/{{ item }}-0.0.1-SNAPSHOT.jar"
     dest: "{{ workspace }}/ansible_managed_{{ env }}/docker_build/{{ item }}/{{ item }}.jar"
+    mode: '0755'
   with_items: "{{ modules }}"
