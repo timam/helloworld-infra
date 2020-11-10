@@ -26,7 +26,6 @@ modules:
     containerPort: 8010
     servicePort: 8010
     serviceType: NodePort
-    logPath: /opt/tomcat/logs
     requests_memory: 1024Mi
     requests_cpu: 500m
     limit_memory: 4096Mi
@@ -44,7 +43,6 @@ modules:
     containerPort: 8020
     servicePort: 8020
     serviceType: NodePort
-    logPath: /opt/tomcat/logs
     requests_memory: 1024Mi
     requests_cpu: 500m
     limit_memory: 4096Mi

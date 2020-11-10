@@ -21,9 +21,6 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: {{ .containerPort }}
-          volumeMounts:
-            - mountPath: {{ .logPath }}
-              name: log-volume
           resources:
             requests:
               memory: {{ .requests_memory }}
