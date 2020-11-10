@@ -60,8 +60,19 @@ pipeline {
             dir("${env.MWREPO}") {
               git(url: "https://github.com/timam/${env.MWREPO}", branch: "${MWBRANCH}", credentialsId: 'devops')
               sh "git reset --hard && git checkout ${params.MWRELEASETAG}"
+              script {
+                MW_GIT_TAG_ID = sh (
+                script: 'git log --format="%H" -n 1',
+                returnStdout: true
+                ).trim()
+              }
             }
             sh "ansible-playbook ansible/artifacts_build.yaml -e workspace=${workspace} -e helloworldMW=${MWREPO} -e env=${params.ENVIRONMENT}"
+          }
+        }
+        stage('Docker System Prune'){
+          steps{
+            sh "docker system prune -af"
           }
         }
         stage('Save Build Information'){
