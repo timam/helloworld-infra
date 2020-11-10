@@ -11,7 +11,7 @@ metadata:
     alb.ingress.kubernetes.io/target-type: instance
     alb.ingress.kubernetes.io/inbound-cidrs: 0.0.0.0/0
     alb.ingress.kubernetes.io/certificate-arn: {{ .Values.alb_ingress.certificate_arn }}
-    alb.ingress.kubernetes.io/healthcheck-path: /actuator/health
+    alb.ingress.kubernetes.io/healthcheck-path: /
     #external-dns.alpha.kubernetes.io/hostname: admin.{{ .Values.domain_name }}, callback.{{ .Values.domain_name }}, admin-app.{{ .Values.domain_name }}
   labels:
     app: public-ingress

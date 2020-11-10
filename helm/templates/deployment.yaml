@@ -34,13 +34,13 @@ spec:
           livenessProbe:
             httpGet:
               port: {{ .containerPort }}
-              path: /actuator/health
+              path: /
             initialDelaySeconds: {{ .livenessProbe_initialDelaySeconds }}
             periodSeconds: {{ .livenessProbe_periodSeconds }}
           readinessProbe:
             httpGet:
               port: {{ .containerPort }}
-              path: /actuator/health
+              path: /
             initialDelaySeconds: {{ .readinessProbe_initialDelaySeconds }}
             periodSeconds: {{ .readinessProbe_periodSeconds }}
       terminationGracePeriodSeconds: {{ .terminationGracePeriodSeconds }}
