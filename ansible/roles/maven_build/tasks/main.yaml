@@ -14,4 +14,5 @@
   copy:
     src:  "{{ workspace }}/{{ helloworldMW }}/{{ item }}/target/{{ item }}-0.0.1-SNAPSHOT.war"
     dest: "{{ workspace }}/ansible_managed_{{ env }}/docker_build/{{ item }}/{{ item }}.war"
+    state: present
   with_items: "{{ modules }}"
