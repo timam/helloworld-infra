@@ -82,7 +82,7 @@ pipeline {
       parallel {
         stage('Copy Frontend Artifact') {
           when {
-            expression { params.buildFrontendDockerImage == "yes" }
+            expression { params.buildFrontendDockerImage == "Yes" }
           }
           steps {
             sh "ansible-playbook ansible/copy_artifacts.yaml workspace=${workspace} -e helloworldMW=${MWREPO} -e env=${params.ENVIRONMENT} -e module=frontend"
@@ -91,7 +91,7 @@ pipeline {
 
         stage('Copy Backend Artifact') {
           when {
-            expression { params.buildFrontendDockerImage == "yes" }
+            expression { params.buildFrontendDockerImage == "Yes" }
           }
           steps {
             sh "ansible-playbook ansible/copy_artifacts.yaml workspace=${workspace} -e helloworldMW=${MWREPO} -e env=${params.ENVIRONMENT} -e module=backend"
