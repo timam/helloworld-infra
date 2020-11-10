@@ -111,7 +111,7 @@ pipeline {
           }
         }
 
-        stage('Frontend Docker Image Build') {
+        stage('Backend Docker Image Build') {
           when {
             expression { params.buildFrontendDockerImage == "Yes" }
           }
