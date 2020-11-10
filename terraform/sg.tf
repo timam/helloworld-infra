@@ -7,6 +7,12 @@ resource "aws_security_group" "private-alb" {
     to_port = 443
     cidr_blocks = [data.aws_vpc.vpc.cidr_block]
   }
+  ingress {
+    from_port = 80
+    protocol = "tcp"
+    to_port = 80
+    cidr_blocks = [data.aws_vpc.vpc.cidr_block]
+  }
   egress {
     from_port = 0
     to_port = 0
@@ -23,6 +29,12 @@ resource "aws_security_group" "public-alb" {
     from_port = 443
     protocol = "tcp"
     to_port = 443
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  ingress {
+    from_port = 80
+    protocol = "tcp"
+    to_port = 80
     cidr_blocks = ["0.0.0.0/0"]
   }
   egress {
