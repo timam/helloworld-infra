@@ -9,7 +9,7 @@ alb_ingress:
   namespace: kube-system
   private_security_group: sg-054362752a65c1785
   public_security_group: sg-0fc7004060169b129
-  certificate_arn: arn:aws:acm:ap-southeast-1:956857916952:certificate/c85abb34-1331-4392-a979-7e4023215290
+  certificate_arn: arn:aws:acm:ap-southeast-1:354285753755:certificate/8ab017c0-75cf-40e2-8695-a7377f0f3558
   private_subnet1: subnet-59c0dd1f
   private_subnet2: subnet-7369383a
   public_subnet1: subnet-4978670f

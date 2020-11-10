@@ -38,6 +38,7 @@ spec:
             # Maximum number of times to retry the aws calls.
             # defaults to 10.
             # - --aws-max-retries=10
+            #  to check logs : kubectl logs -n kube-system   deployment.apps/alb-ingress-controller
           image: docker.io/amazon/aws-alb-ingress-controller:v1.1.5
       serviceAccountName: alb-ingress-controller
 ---
