@@ -3,7 +3,6 @@ pipeline {
   options {
     buildDiscarder(logRotator(numToKeepStr: '10'))
   }
-  currentBuild.description = "Testing Build Description"
 
   environment {
     // Git Config
@@ -34,6 +33,7 @@ pipeline {
       parallel {
         stage('Checkout Infra Code') {
           steps {
+            currentBuild.description = "Testing Build Description"
             script {
               if (params.ENVIRONMENT == 'sit') {
                 IBRANCH = 'develop'
