@@ -122,6 +122,14 @@ pipeline {
         }
       }
     }
+    stage("Helm Upgrade") {
+      steps {
+        input('Ready for Helm Deployment?')
+        dir('helm') {
+            sh "helm upgrade ${params.ENVIRONMENT}-helloworld -n helloworld --set version=${MW_GIT_TAG_ID} --set env=${params.ENVIRONMENT} -f ./values-${params.ENVIRONMENT}.yaml  ./ "
+        }
+      }
+    }
     //Add New Stage Here
 
     //
