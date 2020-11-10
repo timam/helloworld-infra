@@ -57,7 +57,7 @@ pipeline {
           }
           steps{
             dir("${env.MWREPO}") {
-              git(url: "https://github.com/bKash-developer/${env.MWREPO}", branch: "${MWBRANCH}", credentialsId: 'devops')
+              git(url: "https://github.com/timam/${env.MWREPO}", branch: "${MWBRANCH}", credentialsId: 'devops')
               sh "git reset --hard && git checkout ${params.MWRELEASETAG}"
             }
             sh "ansible-playbook ansible/artifacts_build.yaml -e workspace=${workspace} -e helloworldMW=${MWREPO} -e env=${params.ENVIRONMENT}"
