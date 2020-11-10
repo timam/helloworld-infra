@@ -8,7 +8,7 @@ pipeline {
     // Git Config
     IREPO = "helloworld-infra"
     MWREPO = "helloworld-spring"
-    MWBRANCH = "develop"
+    MWBRANCH = "master"
 
     // Slack configuration
     SLACK_CHANNEL       = "jenkins-poc"
