@@ -31,7 +31,7 @@ pipeline {
     stage ('WarmUP') {
 
       parallel {
-        stage('Checkout Infra Code') {
+        stage('Get Infra Infra Code') {
           steps {
             script {
               if (params.ENVIRONMENT == 'sit') {
@@ -49,7 +49,7 @@ pipeline {
           }
         }
 
-        stage('Checkout MW & Build Artifacts'){
+        stage('Checkout & Build Artifacts'){
           when {
             anyOf {
               expression { params.buildFrontendDockerImage == "Yes" }
@@ -71,6 +71,12 @@ pipeline {
           }
         }
         stage('Docker System Prune'){
+          when {
+            anyOf {
+              expression { params.buildFrontendDockerImage == "Yes" }
+              expression { params.buildBackendDockerImage == "Yes" }
+            }
+          }
           steps{
             sh "docker system prune -af"
           }
@@ -112,7 +118,7 @@ pipeline {
       }
     }
 
-    stage ('Build Docker Image') {
+    stage ('Docker Build') {
       parallel {
         stage('Frontend Docker Image Build') {
           when {
