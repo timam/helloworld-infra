@@ -1,0 +1,8 @@
+apiVersion: v1
+appVersion: "0.0.1"
+description: Deploy helloworld microservices
+maintainers:
+  - email: md.talukdar@bkash.com
+    name: Timam
+name: helm
+version: 0.0.1

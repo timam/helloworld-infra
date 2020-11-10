@@ -1,0 +1,16 @@
+{{- range .Values.modules }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name:  {{ $.Values.env }}-{{ $.Values.project }}-{{ .name }}
+spec:
+  ports:
+    - port: {{ .servicePort }}
+      targetPort: {{ .containerPort }}
+      protocol: TCP
+  type: {{ .serviceType }}
+  selector:
+    app:  {{ $.Values.project }}-{{ .name }}
+---
+{{- end }}
