@@ -29,6 +29,7 @@ pipeline {
 
   stages {
     stage ('WarmUP') {
+      currentBuild.description = "Testing Build Description"
       parallel {
         stage('Checkout Infra Code') {
           steps {
