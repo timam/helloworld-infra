@@ -100,6 +100,27 @@ pipeline {
       }
     }
 
+    stage ('Build Docker Image') {
+      parallel {
+        stage('Frontend Docker Image Build') {
+          when {
+            expression { params.buildFrontendDockerImage == "Yes" }
+          }
+          steps {
+            sh "ansible-playbook ansible/image_build.yaml -e workspace=${workspace} -e helloworldMW=${MWREPO} -e env=${params.ENVIRONMENT} -e module=frontend"
+          }
+        }
+
+        stage('Frontend Docker Image Build') {
+          when {
+            expression { params.buildFrontendDockerImage == "Yes" }
+          }
+          steps {
+            sh "ansible-playbook ansible/image_build.yaml -e workspace=${workspace} -e helloworldMW=${MWREPO} -e env=${params.ENVIRONMENT} -e module=backend"
+          }
+        }
+      }
+    }
     //Add New Stage Here
 
     //
