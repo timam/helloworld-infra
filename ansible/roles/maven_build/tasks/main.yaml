@@ -6,6 +6,6 @@
     chdir: "../helloworld-spring"
   register: mvn_result
 
-  - name: "mvn clean task output"
-    debug:
-      var: mvn_result
+- name: "mvn clean task output"
+  debug:
+    var: mvn_result
