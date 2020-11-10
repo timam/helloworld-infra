@@ -44,10 +44,5 @@ spec:
             initialDelaySeconds: {{ .readinessProbe_initialDelaySeconds }}
             periodSeconds: {{ .readinessProbe_periodSeconds }}
       terminationGracePeriodSeconds: {{ .terminationGracePeriodSeconds }}
-      volumes:
-        - name: log-volume
-          hostPath:
-            path: /var/lib/docker/containers/{{ .name }}
-            type: Directory
 ---
 {{- end }}
