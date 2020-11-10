@@ -10,6 +10,12 @@
   debug:
     var: mvn_result
 
+- name: Create Docker Build DIR
+  file:
+    path: "{{ workspace }}/ansible_managed_{{ env }}/docker_build/{{ module }}"
+    state: directory
+    mode: '0755'
+
 - name: Copy Artifacts for Docker Image Build
   copy:
     src:  "{{ workspace }}/{{ helloworldMW }}/{{ item }}/target/{{ item }}-0.0.1-SNAPSHOT.war"
