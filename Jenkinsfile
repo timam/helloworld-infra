@@ -48,7 +48,7 @@ pipeline {
           }
         }
 
-        stage('Checkout MW Code & Build Artifacts'){
+        stage('Checkout MW Code'){
           when {
             anyOf {
               expression { params.buildFrontendDockerImage == "Yes" }
@@ -59,7 +59,6 @@ pipeline {
             dir("${env.MWREPO}") {
               git(url: "https://github.com/bKash-developer/${env.MWREPO}", branch: "${MWBRANCH}", credentialsId: 'devops')
               sh "git reset --hard && git checkout ${params.MWRELEASETAG}"
-              sh "mvn clean package"
             }
           }
         }
