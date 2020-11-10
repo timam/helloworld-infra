@@ -19,8 +19,8 @@ alb_ingress:
 version: 0.0.1
 
 modules:
-  frontend:
-    name: frontend
+  backend:
+    name: backend
     replicas: 2
     maxreplicas: 20
     containerPort: 8010
@@ -37,8 +37,8 @@ modules:
     readinessProbe_initialDelaySeconds: 60
     readinessProbe_periodSeconds: 25
     terminationGracePeriodSeconds: 60
-  backend:
-    name: backend
+  frontend:
+    name: frontend
     replicas: 2
     maxreplicas: 20
     containerPort: 8020
