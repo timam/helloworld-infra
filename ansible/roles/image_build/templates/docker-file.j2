@@ -3,4 +3,4 @@ EXPOSE {{ dockerBuildVars[module].port }}
 RUN rpm -Uvh https://d3pxv6yz143wms.cloudfront.net/11.0.5.10.1/java-11-amazon-corretto-devel-11.0.5.10-1.x86_64.rpm
 ARG JAR_FILE={{ module }}.jar
 COPY ${JAR_FILE} /opt/{{ module }}.jar
-ENTRYPOINT ["java","-Dspring.profiles.active=dev","-jar","/opt/{{ module }}.jar"]
+ENTRYPOINT ["java","-Dspring.profiles.active={{ env }}","-jar","/opt/{{ module }}.jar"]
