@@ -10,7 +10,8 @@
   debug:
     var: mvn_result
 
+- name: Copy Artifacts for Docker Image Build
   copy:
     src:  "{{ workspace }}/ {{ helloworldMW }}/{{ item }}/target/{{ item }}-0.0.1-SNAPSHOT.war"
     dest: "{{ workspace }}/ansible_managed_{{ env }}/docker_build/{{ item }}/{{ item }}.war"
-    with_items: "{{ modules }}"
+  with_items: "{{ modules }}"
