@@ -3,6 +3,7 @@ pipeline {
   options {
     buildDiscarder(logRotator(numToKeepStr: '10'))
   }
+  currentBuild.description = "Testing Build Description"
 
   environment {
     // Git Config
@@ -29,7 +30,7 @@ pipeline {
 
   stages {
     stage ('WarmUP') {
-      currentBuild.description = "Testing Build Description"
+
       parallel {
         stage('Checkout Infra Code') {
           steps {
