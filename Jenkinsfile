@@ -48,7 +48,7 @@ pipeline {
           }
         }
 
-        stage('Checkout and Build Artifacts'){
+        stage('Checkout MW & Build Artifacts'){
           when {
             anyOf {
               expression { params.buildFrontendDockerImage == "Yes" }
@@ -77,6 +77,29 @@ pipeline {
         }
       }
     }
+
+    stage ('Copy Artifacts') {
+      parallel {
+        stage('Copy Frontend Artifact') {
+          when {
+            expression { params.buildFrontendDockerImage == "yes" }
+          }
+          steps {
+            sh "ansible-playbook ansible/copy_artifacts.yaml workspace=${workspace} -e helloworldMW=${MWREPO} -e env=${params.ENVIRONMENT} -e module=frontend"
+          }
+        }
+
+        stage('Copy Backend Artifact') {
+          when {
+            expression { params.buildFrontendDockerImage == "yes" }
+          }
+          steps {
+            sh "ansible-playbook ansible/copy_artifacts.yaml workspace=${workspace} -e helloworldMW=${MWREPO} -e env=${params.ENVIRONMENT} -e module=backend"
+          }
+        }
+      }
+    }
+
     //Add New Stage Here
 
     //
