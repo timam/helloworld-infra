@@ -28,18 +28,6 @@ spec:
             limits:
               memory: {{ .limit_memory }}
               cpu: {{ .limit_cpu }}
-          livenessProbe:
-            httpGet:
-              port: {{ .containerPort }}
-              path: /
-            initialDelaySeconds: {{ .livenessProbe_initialDelaySeconds }}
-            periodSeconds: {{ .livenessProbe_periodSeconds }}
-          readinessProbe:
-            httpGet:
-              port: {{ .containerPort }}
-              path: /
-            initialDelaySeconds: {{ .readinessProbe_initialDelaySeconds }}
-            periodSeconds: {{ .readinessProbe_periodSeconds }}
       terminationGracePeriodSeconds: {{ .terminationGracePeriodSeconds }}
 ---
 {{- end }}

@@ -30,12 +30,7 @@ modules:
     requests_cpu: 500m
     limit_memory: 4096Mi
     limit_cpu: 1000m
-    hpa_averageUtilization: 100
-    livenessProbe_initialDelaySeconds: 60
-    livenessProbe_periodSeconds: 25
-    readinessProbe_initialDelaySeconds: 60
-    readinessProbe_periodSeconds: 25
-    terminationGracePeriodSeconds: 60
+
   frontend:
     name: frontend
     replicas: 2
@@ -47,9 +42,4 @@ modules:
     requests_cpu: 500m
     limit_memory: 4096Mi
     limit_cpu: 1000m
-    hpa_averageUtilization: 100
-    livenessProbe_initialDelaySeconds: 60
-    livenessProbe_periodSeconds: 25
-    readinessProbe_initialDelaySeconds: 60
-    readinessProbe_periodSeconds: 25
-    terminationGracePeriodSeconds: 60
+
