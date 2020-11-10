@@ -19,7 +19,7 @@
 
 - name: Copy Artifacts for Docker Image Build
   copy:
-    src:  "{{ workspace }}/{{ helloworldMW }}/{{ item }}/target/{{ item }}-0.0.1-SNAPSHOT.war"
-    dest: "{{ workspace }}/ansible_managed_{{ env }}/docker_build/{{ item }}/{{ item }}.war"
+    src:  "{{ workspace }}/{{ helloworldMW }}/{{ item }}/target/{{ item }}-0.0.1-SNAPSHOT.jar"
+    dest: "{{ workspace }}/ansible_managed_{{ env }}/docker_build/{{ item }}/{{ item }}.jar"
     state: present
   with_items: "{{ modules }}"
