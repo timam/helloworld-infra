@@ -1,7 +1,6 @@
 locals {
   helmChartValues = {
     env = local.env
-    version: "2cd48892cde359c5c132fe80dd65e29c581c095b"
 
     aws_account_id = data.aws_caller_identity.current.id
     region = data.aws_region.current.name

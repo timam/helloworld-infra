@@ -139,14 +139,31 @@ pipeline {
         }
       }
     }
-    stage("Helm Upgrade") {
+    stage('Terraform Plan') {
       steps {
-        input('Ready for Helm Deployment?')
-        dir('helm') {
-            sh "helm upgrade ${params.ENVIRONMENT}-helloworld -n helloworld --set version=${MW_GIT_TAG_ID} --set env=${params.ENVIRONMENT} -f ./values-${params.ENVIRONMENT}.yaml  ./ "
+        input('Are the Docker Image builds complete?')
+        dir('terraform') {
+          sh "terraform init"
+          sh "terraform workspace select ${params.ENVIRONMENT} || terraform workspace new ${params.ENVIRONMENT}"
+          sh "terraform plan -var='helm_version=${MW_GIT_TAG_ID}' -out=myplan"
         }
       }
     }
+    stage('Approval') {
+      steps {
+        script {
+            def userInput = input(id: 'confirm', message: 'Apply Terraform?', parameters: [[$class: 'BooleanParameterDefinition', defaultValue: false, description: 'Apply terraform', name: 'confirm']])
+        }
+      }
+    }
+    stage('Terraform Apply') {
+      steps {
+        dir('terraform') {
+          sh "terraform apply -input=false myplan"
+        }
+      }
+    }
+}
     //Add New Stage Here
 
     //
