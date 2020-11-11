@@ -163,7 +163,6 @@ pipeline {
         }
       }
     }
-}
     //Add New Stage Here
 
     //
