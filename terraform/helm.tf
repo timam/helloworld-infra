@@ -64,4 +64,8 @@ resource "helm_release" "helloworld" {
   values = [
     local_file.helm-values.content
   ]
+  set {
+    name = "version"
+    value = var.helm_version
+  }
 }

@@ -1,3 +1,8 @@
+variable "helm_version" {
+  type = string
+  default = "latest"
+}
+
 locals {
   env = terraform.workspace
 
