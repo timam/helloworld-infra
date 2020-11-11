@@ -22,7 +22,7 @@ spec:
             backend:
               serviceName: ssl-redirect
               servicePort: use-annotation
-    - host: backend.{{ .Values.domain_name }}
+    - host: frontend.{{ .Values.domain_name }}
       http:
         paths:
           - backend:
