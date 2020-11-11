@@ -15,3 +15,26 @@ How to build Docker Images?
 How to copy artifacts?
 
 ```$ ansible-playbook ansible/copy_artifacts.yaml -e workspace=/home/alamin/helloworld-infra -e helloworldMW=helloworld-spring -e module=frontend -e env=sit```
+
+
+
+helm terraform values example
+```asp
+locals {
+  helmChartValues = {
+    someProperty= {
+      someArray = [
+        "a", "b"
+      ]
+    }
+    alb_ingress = {
+      replicas = "2"
+      namespace= "kube-system"
+      test = {
+        testname= aws_route53_zone.domain.name
+      }
+    }
+  }
+}
+
+```
