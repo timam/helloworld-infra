@@ -1,0 +1,11 @@
+---
+
+- name: Build Artifacts
+  shell: "mvn clean install"
+  args:
+    chdir: "../{{ helloworldMW }}"
+  register: mvn_result
+
+- name: "mvn clean task output"
+  debug:
+    var: mvn_result

@@ -1,0 +1,33 @@
+{{- range .Values.modules }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  {{ $.Values.project }}-{{ .name }}
+spec:
+  replicas: {{ .replicas }}
+  selector:
+    matchLabels:
+      app: {{ $.Values.project }}-{{ .name }}
+  template:
+    metadata:
+      labels:
+        app: {{ $.Values.project }}-{{ .name }}
+    spec:
+      priorityClassName: "priority-class-mw-pods"
+      containers:
+        - name: {{ $.Values.project }}-{{ .name }}
+          image: {{ $.Values.aws_account_id }}.dkr.ecr.{{ $.Values.region }}.amazonaws.com/{{ $.Values.env }}-{{ $.Values.project }}-{{ .name }}:{{ $.Values.version }}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: {{ .containerPort }}
+          resources:
+            requests:
+              memory: {{ .requests_memory }}
+              cpu: {{ .requests_cpu }}
+            limits:
+              memory: {{ .limit_memory }}
+              cpu: {{ .limit_cpu }}
+      terminationGracePeriodSeconds: {{ .terminationGracePeriodSeconds }}
+---
+{{- end }}

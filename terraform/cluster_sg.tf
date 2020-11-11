@@ -25,6 +25,9 @@ resource "aws_security_group" "eks-master" {
 resource "aws_security_group" "eks-worker" {
   name = "${local.env}-${local.project}-eks-worker"
   vpc_id = data.aws_vpc.vpc.id
+  lifecycle {
+    ignore_changes = [ingress, egress]
+  }
   ingress {
     from_port = 0
     protocol = -1

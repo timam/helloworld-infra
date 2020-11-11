@@ -1,3 +1,8 @@
+variable "helm_version" {
+  type = string
+  default = "latest"
+}
+
 locals {
   env = terraform.workspace
 
@@ -31,6 +36,13 @@ locals {
     Cost-Center = local.cost-center
     Project = local.project
   }
+
+  tf_external_domains = {
+    sit  = "helloworld.labs.bka.sh"
+    uat  = ""
+    prod = ""
+  }
+  domain_name = local.tf_external_domains[local.env]
 
   tf_instance_type = {
     sit  = "t3.xlarge"
