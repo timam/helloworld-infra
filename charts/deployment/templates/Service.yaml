@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name:  {{ .Values.microservice_name }}
+  namespace: {{ .Values.namespace }}
+  annotations:
+    alb.ingress.kubernetes.io/healthcheck-path: {{ .Values.health_check_path }}
+spec:
+  ports:
+    - port: {{ .Values.service_port }}
+      targetPort: {{ .Values.container_port }}
+      protocol: TCP
+  type: {{ .Values.service_type }}
+  selector:
+    app: {{ .Values.microservice_name }}

@@ -1,0 +1,5 @@
+private_subnet1: ""
+private_subnet2: ""
+private_subnet3: ""
+certificate_arn: ""
+healthcheck_path:  ""

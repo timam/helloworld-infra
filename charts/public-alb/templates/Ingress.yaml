@@ -1,0 +1,30 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: public-alb
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/subnets: {{ .Values.public_subnet1 }}, {{ .Values.public_subnet2 }}, {{ .Values.public_subnet3 }}
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
+    alb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}'
+    alb.ingress.kubernetes.io/target-type: instance
+    alb.ingress.kubernetes.io/inbound-cidrs: 0.0.0.0/0
+    alb.ingress.kubernetes.io/certificate-arn: {{ .Values.certificate_arn }}
+    alb.ingress.kubernetes.io/healthcheck-path: {{ .Values.healthcheck_path }}
+  labels:
+    app: public-ingress
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: ssl-redirect
+              servicePort: use-annotation
+    - host: {{ .Values.service1_host }}
+      http:
+        paths:
+          - backend:
+              serviceName: {{ .Values.service1_name }}
+              servicePort: {{ .Values.service1_port }}

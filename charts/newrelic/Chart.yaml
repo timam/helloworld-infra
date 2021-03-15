@@ -1,0 +1,10 @@
+apiVersion: v2
+name: newrelic
+description: A Helm chart for Kubernetes
+
+dependencies:
+  - name: metrics-server
+    version: 0.1.0
+    repository: "file://../metrics-server"
+
+version: 0.1.0

@@ -1,0 +1,5 @@
+region: ""
+vpc_id: ""
+cluster_name: ""
+replicaCount: "2"
+ingress_class: alb

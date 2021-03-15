@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.microservice_name }}-fluent-bit-config
+  namespace: {{ .Values.namespace }}
+  labels:
+    k8s-app: fluent-bit
+data:
+  fluent-bit.conf: |
+    [SERVICE]
+        Flush                     5
+        Log_Level                 info
+        Daemon                    off
+        Parsers_File              parsers.conf
+    @INCLUDE application-log.conf
+  application-log.conf: |
+    [INPUT]
+        Name                tail
+        Path                /opt/tomcat/logs/*.log
+        Mem_Buf_Limit       5MB
+        Refresh_Interval    10
+        Multiline           on
+        Parser_Firstline    tomcat
+
+    [FILTER]
+        name                grep
+        match               *
+    [OUTPUT]
+        Name                cloudwatch_logs
+        Match               *
+        region              ap-southeast-1
+        log_stream_prefix   ${HOSTNAME}
+        log_group_name      {{ $.Values.env }}-{{ $.Values.microservice_name }}
+        auto_create_group   true
+  parsers.conf: |
+    [PARSER]
+        Name                tomcat
+        Format              regex
+        Regex               ^(?<time>\d{4}\/\d{2}\/\d{2} \d{2}:\d{2}:\d{2}).*(?<exec>http(.*? \|?))(?<level>.*?\|)(?<logger>.*?\|)(?<traceID>.*?\|)(?<methodParams>.*)

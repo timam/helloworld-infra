@@ -1,0 +1,7 @@
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: priority-class-metricsserver
+value: 70998
+globalDefault: false
+description: "metrics-server"

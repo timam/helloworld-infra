@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  {{ $.Values.microservice_name }}
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: {{ $.Values.microservice_name }}
+  template:
+    metadata:
+      labels:
+        app: {{ $.Values.microservice_name }}
+    spec:
+      priorityClassName: "priority-class-{{ .Values.microservice_name }}-pods"
+      containers:
+        - name: {{ $.Values.microservice_name }}
+          image: {{ .Values.docker_image }}:{{ .Values.docker_image_tag }}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: {{ .Values.container_port }}
+          resources:
+            requests:
+              memory: {{ .Values.memory_request }}
+              cpu: {{ .Values.cpu_request }}
+            limits:
+              memory: {{ .Values.memory_limit }}
+              cpu: {{ .Values.cpu_limit }}
+          livenessProbe:
+            httpGet:
+              port: {{ .Values.container_port }}
+              path: {{ .Values.health_check_path }}
+            initialDelaySeconds: {{ .Values.liveness_prob_delay }}
+            periodSeconds: {{ .Values.liveness_prob_period }}
+          readinessProbe:
+            httpGet:
+              port: {{ .Values.container_port }}
+              path: {{ .Values.health_check_path }}
+            initialDelaySeconds: {{ .Values.readiness_prob_delay }}
+            periodSeconds: {{ .Values.readiness_prob_period }}
+          volumeMounts:
+            - name: log-volume
+              mountPath: /opt/tomcat/logs/
+        - name: fluentbit
+          image: 906394416424.dkr.ecr.ap-southeast-1.amazonaws.com/aws-for-fluent-bit:2.10.0
+          volumeMounts:
+            - name: log-volume
+              mountPath: /opt/tomcat/logs/
+            - name: {{ .Values.microservice_name }}-fluent-bit-config
+              mountPath: /fluent-bit/etc/
+      volumes:
+        - name: log-volume
+          emptyDir: { }
+        - name: {{ .Values.microservice_name }}-fluent-bit-config
+          configMap:
+            name: {{ .Values.microservice_name }}-fluent-bit-config
+      terminationGracePeriodSeconds: {{ .Values.terminate_grace_period }}

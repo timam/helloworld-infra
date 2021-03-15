@@ -1,0 +1,7 @@
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: priority-class-{{ .Values.microservice_name }}-pods
+value: 60999
+globalDefault: false
+description: "mw pods"

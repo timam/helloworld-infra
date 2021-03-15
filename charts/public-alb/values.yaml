@@ -1,0 +1,8 @@
+public_subnet1: ""
+public_subnet2: ""
+public_subnet3: ""
+certificate_arn: ""
+healthcheck_path:  "/actuator/health"
+service1_name: ""
+service1_host: ""
+service1_port: ""

@@ -1,0 +1,39 @@
+# Source: nri-bundle/charts/nri-metadata-injection/templates/job.yaml
+
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: nri-bundle-nri-metadata-injection-job
+  namespace: monitoring
+  labels:
+    app.kubernetes.io/name: nri-metadata-injection
+    helm.sh/chart: nri-metadata-injection-1.0.0
+    app.kubernetes.io/instance: nri-bundle
+    app.kubernetes.io/version: "1.2.0"
+spec:
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: nri-metadata-injection
+        helm.sh/chart: nri-metadata-injection-1.0.0
+        app.kubernetes.io/instance: nri-bundle
+        app.kubernetes.io/version: "1.2.0"
+    spec:
+      serviceAccountName: nri-bundle-nri-metadata-injection
+      containers:
+        - name: nri-metadata-injection-job
+          # This is a minimal kubectl image based on Alpine Linux that sings certificates using the k8s extension api server
+          image: "newrelic/k8s-webhook-cert-manager:1.2.1"
+          imagePullPolicy: "IfNotPresent"
+          command: ["./generate_certificate.sh"]
+          args:
+            - "--service"
+            - nri-bundle-nri-metadata-injection
+            - "--webhook"
+            - nri-bundle-nri-metadata-injection
+            - "--secret"
+            - nri-bundle-nri-metadata-injection
+            - "--namespace"
+            - monitoring
+      restartPolicy: Never
+  backoffLimit: 1

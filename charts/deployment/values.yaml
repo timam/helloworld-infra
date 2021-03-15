@@ -1,0 +1,22 @@
+env: ""
+namespace: ""
+microservice_name: ""
+health_check_path: ""
+docker_image: ""
+docker_image_tag: ""
+container_port: ""
+service_port: ""
+service_type: ""
+replicas: ""
+
+memory_request: ""
+cpu_request: ""
+memory_limit: ""
+cpu_limit: ""
+
+liveness_prob_delay: ""
+liveness_prob_period: ""
+readiness_prob_delay: ""
+readiness_prob_period: ""
+terminate_grace_period: ""
+
