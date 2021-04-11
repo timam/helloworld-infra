@@ -1,0 +1,11 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: sit-helloworld-postgres
+spec:
+  selector:
+    app: sit-helloworld-postgres
+  ports:
+    - port: 5432
+      protocol: TCP
+      targetPort: 5432
