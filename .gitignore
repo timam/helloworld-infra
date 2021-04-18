@@ -3,9 +3,9 @@
 *.go
 *.jar
 *.war
-*.tfstate
+# *.tfstate
 *.retry
 .idea
-.terraform
-terraform.tfstate*
+# .terraform
+# terraform.tfstate*
 .DS_Store
