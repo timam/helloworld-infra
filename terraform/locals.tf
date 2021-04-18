@@ -22,14 +22,13 @@ locals {
   }
   cost-center = local.costs[local.env]
 
-  project_name = {
+  project_name = lookup({
     sit = "helloworld"
     uat = "helloworld"
     lt = "helloworld"
     prod = "helloworld"
-  }
-  project = local.project_name[local.env]
-
+  }, local.env)
+  project = local.project_name
   common_tags = {
     Environment = local.env
     Owner = local.owner
@@ -53,15 +52,15 @@ locals {
 
   tf_worker-keypair = {
     sit  = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDFP13Y8TyBgKuCzGzrXItnIylgW6A49ykP7yUf7ZliVC2+oD+3EeDWhTKsQQsRaoio9+A+gq1IaNN+UVudUw7xJ7rXdF4LWfAtWsqXAb5bsHB7bsXNeeJ6/dXreK1wqcUbuorDuGVGnXCkIMjT/MVJXUyFSvw/18ns7wQOZO4ng7/9UdT3QBdjxaTP+n8JjRbLsY4fa4GYMfOLwN7sPwBURatijN7wxrnvaBIK+8FVPq2YE4jK0ypFe3JHFZnoob+hGDRCZBh9zNxh9Mai/G6sDMekBl3yFXlKyebB0OMN2BecO0+F44s/lVC/jbsIiU+3MPLOT0PFk1D53C+LLSpl"
-    uat  = ""
+    uat  = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCw9zKZ5kC8m/Xi2QsbQh9w5R7JjtJAy2fTutn12e0Yn4o9MT888YofdaVAl4+J6wkE25yTVjFaTY/y85XWjs61WSIHKEts01YySEZ+5NVazpkai6+PKm5yDMNCIS71qRVURaClnhcq58TeV7oDJnHTvviW1sOh3H63YBpte2gevxQv876SH0nvHuzsMDuGavmKHO5qoL7sFHbc1FP2C2zcUCrQbLXuimY8TUQYvqRopE5CqONy/buP8FXGaXZyK5/pGwNvKry8IJEZY3sZEHdUH+HXlVJBRNywS55MuD3CQwNJMKmWpQE+jGPyzA8HAaElpvRKixTCfThMUOVaV5k6an4LsWQK/j/b9cBVMs7un/kGgaOZnMYDehVGHf4cow/YaHrptzh4zR5Hsu0oe7qxKGSVxSAOsNw+9qE8E8AQmtoHkbsdJTgV8EGBhWoEo6Zld7EKgG7Q4UoArhYMnZTe6RA0Ciz5lj8rO1XXGycS1ONhugan2rEPeIGD9t6f6sxtZfxmE5QviDje2COMueiPET/FaxX7hBMxFf/6mD07/CG3VwfwhLTelIvEaAWuHHGPe0yhbdMuaF6GAs6qxUJTyHS7swpLjj79vvCperfEaIi26uGWoTVTQdT+gaQkHQsTHveiLhtQOggOPHAH3rE2SRC7gKJVi8EReU5iRb1wBQ== L-bKash-MAC-106"
     prod = ""
   }
   worker-keypair = local.tf_worker-keypair[local.env]
 
   eksVersions = {
-    sit  = "1.17"
-    uat  = "1.17"
-    prod = "1.17"
+    sit  = "1.18"
+    uat  = "1.18"
+    prod = "1.18"
   }
   eksVersion = local.eksVersions[local.env]
 

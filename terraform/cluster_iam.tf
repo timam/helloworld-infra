@@ -15,27 +15,3 @@ resource "aws_iam_role_policy_attachment" "eks-worker-role-servicepolicy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSServicePolicy"
   role = module.eks-worker-role.role-name
 }
-resource "aws_iam_role_policy_attachment" "eks-worker-role-dynamodb" {
-  policy_arn = "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"
-  role = module.eks-worker-role.role-name
-}
-resource "aws_iam_role_policy_attachment" "eks-worker-role-s3" {
-  policy_arn = "arn:aws:iam::aws:policy/AmazonS3FullAccess"
-  role = module.eks-worker-role.role-name
-}
-resource "aws_iam_role_policy_attachment" "eks-worker-role-containerregistry" {
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
-  role = module.eks-worker-role.role-name
-}
-resource "aws_iam_role_policy_attachment" "eks-worker-role-CloudWatchAgentServerPolicy" {
-  policy_arn = "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"
-  role = module.eks-worker-role.role-name
-}
-resource "aws_iam_role_policy_attachment" "eks-worker-role-EC2FullAccess" {
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2FullAccess"
-  role = module.eks-worker-role.role-name
-}
-resource "aws_iam_role_policy_attachment" "eks-worker-role-WAFFullAccess" {
-  policy_arn = "arn:aws:iam::aws:policy/AWSWAFFullAccess"
-  role = module.eks-worker-role.role-name
-}

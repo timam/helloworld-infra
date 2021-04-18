@@ -10,7 +10,7 @@ module "eks-worker-asg" {
   spot_instance_pools = local.spot_instance_pools
   name = "${local.env}-${local.project}-eks-worker-asg"
   //  tags = merge(map("Name",join("-",[local.env,local.project,"eks-worker-asg"])),map("ResourceType","asg"),local.common_tags)
-  vpc_zone_identifier = [data.aws_subnet.private-subnet-1b.id, data.aws_subnet.private-subnet-1c.id]
+  vpc_zone_identifier = module.vpc.private_subnet_ids
   on_demand_percentage_above_base_capacity = local.on_demand_percentage_above_base_capacity
   scale-up-policy = local.scale-up-policy
   scale-down-policy = local.scale-down-policy

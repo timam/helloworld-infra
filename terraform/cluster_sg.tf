@@ -1,11 +1,11 @@
 resource "aws_security_group" "eks-master" {
   name = "${local.env}-${local.project}-eks-master"
-  vpc_id = data.aws_vpc.vpc.id
+  vpc_id = module.vpc.vpc_id
   ingress {
     from_port = 443
     protocol = "tcp"
     to_port = 443
-    cidr_blocks = [data.aws_vpc.vpc.cidr_block]
+    cidr_blocks = [local.vpc_cidr_block]
   }
   ingress {
     from_port = 0
@@ -24,7 +24,7 @@ resource "aws_security_group" "eks-master" {
 
 resource "aws_security_group" "eks-worker" {
   name = "${local.env}-${local.project}-eks-worker"
-  vpc_id = data.aws_vpc.vpc.id
+  vpc_id = module.vpc.vpc_id
   lifecycle {
     ignore_changes = [ingress, egress]
   }

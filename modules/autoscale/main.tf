@@ -38,31 +38,3 @@ resource "aws_autoscaling_group" "asg" {
     create_before_destroy = true
   }
 }
-resource "aws_autoscaling_schedule" "office-time-scale-up" {
-  count = var.scale-up-policy ? 1 : 0
-  scheduled_action_name = "${var.name}-office-time-scale-up"
-  min_size = var.min_size
-  max_size = var.max_size
-  desired_capacity = var.min_size
-  recurrence = "30 2 * * SUN-THU"
-  autoscaling_group_name = aws_autoscaling_group.asg.name
-}
-resource "aws_autoscaling_schedule" "night-time-scale-down" {
-  count = var.scale-down-policy ? 1 : 0
-  scheduled_action_name = "${var.name}-night-time-scale-down"
-  min_size = 0
-  max_size = 0
-  desired_capacity = 0
-  recurrence = "0 16 * * *"
-  autoscaling_group_name = aws_autoscaling_group.asg.name
-}
-resource "aws_autoscaling_schedule" "schedule-scale-down-midnight" {
-  count = var.scale-down-policy ? 1 : 0
-  scheduled_action_name = "${var.name}-schedule-scale-down-midnight"
-  min_size = 0
-  max_size = 0
-  desired_capacity = 0
-  recurrence = "0 20 * * *"
-  autoscaling_group_name = aws_autoscaling_group.asg.name
-}
-
