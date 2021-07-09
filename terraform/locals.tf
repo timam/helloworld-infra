@@ -1,5 +1,5 @@
 variable "helm_version" {
-  type = string
+  type    = string
   default = "latest"
 }
 
@@ -7,34 +7,34 @@ locals {
   env = terraform.workspace
 
   owner_team = {
-    sit = "SE"
-    uat = "SE"
-    lt = "SE"
+    sit  = "SE"
+    uat  = "SE"
+    lt   = "SE"
     prod = "SE"
   }
   owner = local.owner_team[local.env]
 
   costs = {
-    sit = "devops"
-    uat = "devops"
-    lt = "devops"
+    sit  = "devops"
+    uat  = "devops"
+    lt   = "devops"
     prod = "devops"
   }
   cost-center = local.costs[local.env]
 
   project_name = {
-    sit = "helloworld"
-    uat = "helloworld"
-    lt = "helloworld"
+    sit  = "helloworld"
+    uat  = "helloworld"
+    lt   = "helloworld"
     prod = "helloworld"
   }
   project = local.project_name[local.env]
 
   common_tags = {
     Environment = local.env
-    Owner = local.owner
+    Owner       = local.owner
     Cost-Center = local.cost-center
-    Project = local.project
+    Project     = local.project
   }
 
   tf_external_domains = {
@@ -153,12 +153,12 @@ locals {
 
 
   tf_eks-worker-node-userdata = {
-    sit = <<USERDATA
+    sit  = <<USERDATA
 #!/bin/bash
 set -o xtrace
 /etc/eks/bootstrap.sh --apiserver-endpoint '${module.eks-cluster.eks_endpoint}' --b64-cluster-ca '${module.eks-cluster.eks_certificate_authority[0].data}' '${module.eks-cluster.cluster_name}'
 USERDATA
-    uat = <<USERDATA
+    uat  = <<USERDATA
 #!/bin/bash
 set -o xtrace
 /etc/eks/bootstrap.sh --apiserver-endpoint '${module.eks-cluster.eks_endpoint}' --b64-cluster-ca '${module.eks-cluster.eks_certificate_authority[0].data}' '${module.eks-cluster.cluster_name}'
@@ -168,7 +168,7 @@ USERDATA
 set -o xtrace
 /etc/eks/bootstrap.sh --apiserver-endpoint '${module.eks-cluster.eks_endpoint}' --b64-cluster-ca '${module.eks-cluster.eks_certificate_authority[0].data}' '${module.eks-cluster.cluster_name}'
 USERDATA
-    lt = <<USERDATA
+    lt   = <<USERDATA
 #!/bin/bash
 set -o xtrace
 /etc/eks/bootstrap.sh --apiserver-endpoint '${module.eks-cluster.eks_endpoint}' --b64-cluster-ca '${module.eks-cluster.eks_certificate_authority[0].data}' '${module.eks-cluster.cluster_name}'
